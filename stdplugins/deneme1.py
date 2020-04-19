@@ -8,7 +8,7 @@ from uniborg.util import admin_cmd
 @borg.on(admin_cmd(pattern="oc")) # bunlar da standart sadece pattern içinde neye tepki vereceğini yazacaksın
 async def _(event):
     for a in range(1,6):
-        await event.send_message(
+        await borg.send_message(
             entity=event.chat_id,
             text="OROSPU ÇOCUĞU"
         )
