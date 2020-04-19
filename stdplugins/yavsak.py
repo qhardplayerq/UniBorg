@@ -5,7 +5,7 @@ from telethon import events
 from datetime import datetime
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern="oc"))
+@borg.on(admin_cmd(pattern="yavsak"))
 async def _(event):
     await event.delete()
     for a in range(1,11):
