@@ -9,6 +9,6 @@ from uniborg.util import admin_cmd
 async def _(event):
     for a in range(1,6):
         await borg.send_message(
-            entity=event.chat_id,
-            text="OROSPU ÇOCUĞU"
+            event.chat_id,
+            "OROSPU ÇOCUĞU"
         )
