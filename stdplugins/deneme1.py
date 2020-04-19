@@ -7,6 +7,7 @@ from uniborg.util import admin_cmd
 
 @borg.on(admin_cmd(pattern="oc")) # bunlar da standart sadece pattern içinde neye tepki vereceğini yazacaksın
 async def _(event):
+    await event.delete()
     for a in range(1,6):
         await borg.send_message(
             event.chat_id,
