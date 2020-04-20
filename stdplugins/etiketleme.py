@@ -30,14 +30,14 @@ async def get_users(show):
             if not show.pattern_match.group(1):
                 async for user in show.client.iter_participants(show.chat_id):
                     if not user.deleted:
-                        mentions += f"\n[{user.first_name}](tg://user?id={user.id}) "
+                        mentions += f"\n[{user.name}](tg://user?id={user.id}) "
                     else:
                         mentions += f"\nDeleted Account "
             else:
                 searchq = show.pattern_match.group(1)
                 async for user in show.client.iter_participants(show.chat_id, search=f'{searchq}'):
                     if not user.deleted:
-                        mentions += f"\n[{user.first_name}](tg://user?id={user.id}) "
+                        mentions += f"\n[{user.name}](tg://user?id={user.id}) "
                     else:
                         mentions += f"\nDeleted Account "
         except ChatAdminRequiredError as err:
