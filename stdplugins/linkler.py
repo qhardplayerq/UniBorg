@@ -8,7 +8,7 @@ from uniborg.util import admin_cmd
 @borg.on(admin_cmd(pattern="link"))
 async def _(event):
     await event.delete()
-    for a in range(1,11):
+    for a in range(1,2):
         await borg.send_message(
             event.chat_id,
             "Kanal: t.me/bayanlink \nGrup: t.me/deryanin_mekani"
