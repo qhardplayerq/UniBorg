@@ -27,8 +27,9 @@ async def _(event):
         previous_message = await event.get_reply_message()
         text = previous_message.message
         lan = "tr"
-    # elif "|" in input_str:
-    #     lan, text = input_str.split("|")
+    elif input_str:
+        lan = "tr"
+        text = input_str.split("|")
     else:
         await event.edit("Invalid Syntax. Module stopping.")
         return
