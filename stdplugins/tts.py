@@ -29,7 +29,7 @@ async def _(event):
         lan = "tr"
     elif input_str:
         lan = "tr"
-        text = input_str.split("|")
+        text = input_str
     else:
         await event.edit("Invalid Syntax. Module stopping.")
         return
