@@ -113,7 +113,7 @@ async def approve_p_m(event):
                 pmpermit_sql.disapprove(chat.id)
                 await event.edit("Blocked PM")
                 await asyncio.sleep(3)
-                await event.client(functions.contacts.BlockRequest(chat.id))
+                # await event.client(functions.contacts.BlockRequest(chat.id))
 
 
 @borg.on(admin_cmd(pattern="list approved pms"))
