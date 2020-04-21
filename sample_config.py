@@ -59,7 +59,6 @@ class Config(object):
     # foloowing plugins won't work on Heroku,
     # because of their ephemeral file system
     NO_LOAD = [
-        "notification_mtab_manager",
         "dbhelper",
         "fban_gban",
         "gban",
