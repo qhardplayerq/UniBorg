@@ -11,7 +11,6 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern=("sil ?(.*)"))) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     chat = await event.get_chat()
     print(chat.id)
@@ -20,7 +19,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern=("dialog ?(.*)"))) # pylint:disable=E0602
-@errors_handler
 async def _(event):
     await event.delete()
     me = await event.client.get_me()
