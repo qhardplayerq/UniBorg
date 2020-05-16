@@ -13,4 +13,4 @@ async def _(event):
             event.chat_id,
             "Kanal: https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w \nGrup: t.me/deryanin_mekani"
 
-        )
+        ) 
