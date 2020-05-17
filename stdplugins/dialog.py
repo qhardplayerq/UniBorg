@@ -4,7 +4,7 @@ from telethon import events, functions, types
 from telethon.sync import TelegramClient
 import asyncio
 from sample_config import Config
-from uniborg.util import admin_cmd, errors_handler
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
