@@ -25,7 +25,7 @@ async def _(event):
     input_str = event.pattern_match.group(1)
     idler = []
     async for dialog in event.client.iter_dialogs(limit=None):
-        if dialog.is_user and not dialog.entity.bot:
+        if dialog.is_user and not dialog.entity.bot and not dialog.entity.deleted:
             idler.append(dialog.entity.id)
             # print(dialog.entity.id,dialog.name)
             # print("")
