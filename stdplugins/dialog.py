@@ -46,7 +46,6 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="send ?(.*)"))
-@errors_handler
 async def _(event):
     await event.delete()
     me = await event.client.get_me()
