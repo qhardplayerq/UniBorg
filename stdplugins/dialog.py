@@ -37,6 +37,7 @@ async def _(event):
                 entity=idler[k],
                 message=input_str
             )
+            await asyncio.sleep(3.1)
     finally:
         await event.client.send_message(
             'me',
