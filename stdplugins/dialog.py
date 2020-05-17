@@ -18,7 +18,7 @@ async def _(event):
     # await event.client.delete_dialog(user, revoke=True)
 
 
-@borg.on(admin_cmd(pattern=("dialog ?(.*)"))) # pylint:disable=E0602
+@borg.on(admin_cmd(pattern=("gonder ?(.*)"))) # pylint:disable=E0602
 async def _(event):
     await event.delete()
     me = await event.client.get_me()
