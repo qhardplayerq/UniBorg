@@ -5,12 +5,12 @@ from telethon import events
 from datetime import datetime
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern="linkler"))
+@borg.on(admin_cmd(pattern="reklam"))
 async def _(event):
     await event.delete()
     for a in range(1,2):
         await borg.send_message(
             event.chat_id,
-            "Kanal: https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w \nGrup: t.me/deryanin_mekani"
+            "1-)5K Kanal: t.me/linkteskilati3\n\n2-)5.1K Kanal: t.me/bayanlink\n\n3-)15K Grup: t.me/deryanin_mekani"
 
         ) 
