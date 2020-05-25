@@ -11,6 +11,6 @@ async def _(event):
     for a in range(1,2):
         await borg.send_message(
             event.chat_id,
-            "Kanal: https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w \nGrup: t.me/deryanin_mekani"
+            "Kanal: https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w \n\nGrup: t.me/deryanin_mekani"
 
         ) 
