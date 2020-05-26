@@ -20,8 +20,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 
 @borg.on(admin_cmd(pattern=r"ch ?(.*)",allow_sudo=True))
 async def get_media(event):
-    chat = "bayanlink"
-    from_chat = "deryanin_mekani"
+    chat = "https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w"
+    from_chat = "https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w"
     mesajlar = []
     print("kanaldan rastgele mesaj seçiliyor.")
     await event.edit("kanaldan rastgele link seçiliyor.")
