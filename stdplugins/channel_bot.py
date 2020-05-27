@@ -31,7 +31,7 @@ async def get_media(event):
     secim = int(random.choice(mesajlar))
     print(secim)
     x = await borg.forward_messages(
-        entity=await event.client.get_entity('https://t.me/deryanin_mekani'),
+        entity=await event.client.get_entity('t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w'),
         messages=secim,
         from_peer=await event.client.get_entity('t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w'),
     )
