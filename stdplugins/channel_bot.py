@@ -20,8 +20,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 
 @borg.on(admin_cmd(pattern=r"ch ?(.*)",allow_sudo=True))
 async def get_media(event):
+    # chat = -1001285905728
     chat = "https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w"
-    from_chat = "https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w"
     mesajlar = []
     print("kanaldan rastgele mesaj seçiliyor.")
     await event.edit("kanaldan rastgele link seçiliyor.")
@@ -31,10 +31,10 @@ async def get_media(event):
     secim = int(random.choice(mesajlar))
     print(secim)
     x = await borg.forward_messages(
-        entity=chat,
+        entity=await event.client.get_entity('t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w'),
         messages=secim,
-        from_peer=chat
+        from_peer=await event.client.get_entity('https://t.me/deryanin_mekani')
     )
-    await event.edit("kanala başarılı bir şekilde link gönderildi. Kontrol etmek için @bayanlink")
+    await event.edit("kanala başarılı bir şekilde link gönderildi. Kontrol etmek için 👇\n https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w")
     # x = await borg.get_messages(chat, s)
     print(x)
