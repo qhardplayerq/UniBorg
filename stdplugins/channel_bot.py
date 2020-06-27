@@ -46,17 +46,17 @@ async def get_media(event):
     k = await event.edit("işlem yapılıyor..")
     # print(reply_message)
     if reply_message:
-        await event.send_message(
+        await event.client.send_message(
             entity=await event.client.get_entity("https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w"),
             message=reply_message
         )
         await asyncio.sleep(1.2)
-        await event.send_message(
+        await event.client.send_message(
             entity=await event.client.get_entity("@linkteskilati3"),
             message=reply_message
         )
         await asyncio.sleep(1.2)
-        await event.send_message(
+        await event.client.send_message(
             entity=await event.client.get_entity("@deryanin_linkleri"),
             message=reply_message
         )
@@ -66,4 +66,4 @@ async def get_media(event):
         # await event.reply(reply_message)
     else:
         await k.edit("mesajı yanıtla lan :)")
-    await k.edit("mesaj tüm kanallara gönderildi")
+#     await k.edit("mesaj tüm kanallara gönderildi")
