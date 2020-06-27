@@ -29,7 +29,7 @@ async def get_media(event):
         mesajlar.append(message.id)
 
     secim = int(random.choice(mesajlar))
-    print(secim)
+#     print(secim)
     x = await borg.forward_messages(
         entity=await event.client.get_entity('t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w'),
         messages=secim,
@@ -37,4 +37,35 @@ async def get_media(event):
     )
     await event.edit("kanala başarılı bir şekilde link gönderildi. Kontrol etmek için 👇\n https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w")
     # x = await borg.get_messages(chat, s)
-    print(x)
+#     print(x)
+
+
+@borg.on(admin_cmd(pattern="post ?(.*)",allow_sudo=True))
+async def get_media(event):
+    reply_message = await event.get_reply_message()
+    k = await event.edit("işlem yapılıyor..")
+    # print(reply_message)
+    if reply_message:
+        try:
+            await event.send_message(
+                entity=-1001285905728,
+                message=reply_message
+            )
+            await asyncio.sleep(1.2)
+            await event.send_message(
+                entity=-1001462277510,
+                message=reply_message
+            )
+            await asyncio.sleep(1.2)
+            await event.send_message(
+                entity=-1001188302270,
+                message=reply_message
+            )
+            await asyncio.sleep(1.2)
+        except:
+            await k.edit("hata oluştu.")
+        
+        # await event.reply(reply_message)
+    else:
+        await k.edit("mesajı yanıtla lan :)")
+    await k.edit("mesaj tüm kanallara gönderildi")
