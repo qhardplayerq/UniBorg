@@ -48,17 +48,17 @@ async def get_media(event):
     if reply_message:
         try:
             await event.send_message(
-                entity=-1001285905728,
+                entity=await event.client.get_entity("https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w"),
                 message=reply_message
             )
             await asyncio.sleep(1.2)
             await event.send_message(
-                entity=-1001462277510,
+                entity=await event.client.get_entity("@linkteskilati3"),
                 message=reply_message
             )
             await asyncio.sleep(1.2)
             await event.send_message(
-                entity=-1001188302270,
+                entity=await event.client.get_entity("@deryanin_linkleri"),
                 message=reply_message
             )
             await asyncio.sleep(1.2)
