@@ -13,11 +13,11 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 async def _(event):
 	if event.fwd_from:
 		return
-	deq = deque(list("123456789123456789123456789123456789"))
+	deq = deque(list("123456789asdfghjkli123456789asdfghjkli"))
 	for _ in range(100):
-		await asyncio.sleep(1)
+		await asyncio.sleep(5)
 		await event.edit("".join(deq))
-		deq.rotate(15)
+		deq.rotate(5)
 		
 @borg.on(admin_cmd(pattern="elegecir", outgoing=True))
 async def bkallp(event):
