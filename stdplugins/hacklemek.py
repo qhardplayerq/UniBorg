@@ -19,7 +19,7 @@ async def _(event):
 		await event.edit("".join(deq))
 		deq.rotate(1)
 		
-@borg.on(admin_cmd(pattern="hack", outgoing=True))
+@borg.on(admin_cmd(pattern="elegecir", outgoing=True))
 async def bkallp(event):
     a = "❤️ 🧡 💛 💚 💙 💜 🖤 🤍 🤎 💔 💘 💝".split(" ")
     d = await event.reply("...")
