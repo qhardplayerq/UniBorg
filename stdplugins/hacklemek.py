@@ -13,8 +13,8 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 async def _(event):
 	if event.fwd_from:
 		return
-	deq = deque(list("123456789asdfghjkli123456789asdfghjkli"))
-	for _ in range(1):
+	deq = deque(list("1101001001010101001111101001001001\n1101001001010101001111101001001001\n1101001001010101001111101001001001"))
+	for _ in range(100):
 		await asyncio.sleep(5)
 		await event.edit("".join(deq))
 		deq.rotate(5)
