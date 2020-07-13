@@ -9,7 +9,7 @@ import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-@borg.on(events.NewMessage(pattern=r"\.target_database", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\.hacking_database", outgoing=True))
 async def _(event):
 	if event.fwd_from:
 		return
