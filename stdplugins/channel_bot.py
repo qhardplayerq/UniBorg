@@ -60,6 +60,12 @@ async def get_media(event):
             entity=await event.client.get_entity("@deryanin_linkleri"),
             message=reply_message
         )
+        )
+        await asyncio.sleep(1.2)
+        await event.client.send_message(
+            entity=await event.client.get_entity("@deryanin_mekani"),
+            message=reply_message
+        )
         await asyncio.sleep(1.2)
 
         
