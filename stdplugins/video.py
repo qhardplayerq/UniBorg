@@ -17,17 +17,24 @@ DEL_TIME_OUT = 3
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
                     
-@borg.on(admin_cmd(pattern="video ?(.*)",allow_sudo=True))
+@borg.on(admin_cmd(pattern="post ?(.*)",allow_sudo=True))
 async def get_media(event):
     reply_message = await event.get_reply_message()
     k = await event.edit("post gönderiliyor...")
     # print(reply_message)
     if reply_message:
-       
+        await asyncio.sleep(1.2)
         await event.client.send_message(
-            entity=await event.client.get_entity("https://t.me/joinchat/AAAAAFeV963Az-qZVyFvig"),
+            entity=await event.client.get_entity("@linkteskilati3"),
             message=reply_message
         )
-          await asyncio.sleep(1.2)
+        await asyncio.sleep(1.2)
+
+        
+        # await event.reply(reply_message)
     else:
-        await k.edit("videoyu yanıtla lan :)")
+        await k.edit("mesajı yanıtla lan :)")
+#     await k.edit("mesaj tüm kanallara gönderildi")
+       
+       
+        
