@@ -17,7 +17,7 @@ DEL_TIME_OUT = 3
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
                     
-@borg.on(admin_cmd(pattern="post ?(.*)",allow_sudo=True))
+@borg.on(admin_cmd(pattern="video ?(.*)",allow_sudo=True))
 async def get_media(event):
     reply_message = await event.get_reply_message()
     k = await event.edit("post gönderiliyor...")
