@@ -26,5 +26,6 @@ async def get_media(event):
         await event.client.send_message(
             entity=await event.client.get_entity("https://t.me/joinchat/AAAAAFeV963Az-qZVyFvig"),
             message=reply_message
-            else:
+          await asyncio.sleep(1.2)
+    else:
         await k.edit("videoyu yanıtla lan :)")
