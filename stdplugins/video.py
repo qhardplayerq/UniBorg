@@ -23,9 +23,11 @@ async def get_media(event):
     k = await event.edit("post gönderiliyor...")
     # print(reply_message)
     if reply_message:
+       
         await event.client.send_message(
             entity=await event.client.get_entity("https://t.me/joinchat/AAAAAFeV963Az-qZVyFvig"),
             message=reply_message
+        )
           await asyncio.sleep(1.2)
     else:
         await k.edit("videoyu yanıtla lan :)")
