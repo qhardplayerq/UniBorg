@@ -20,7 +20,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 @borg.on(admin_cmd(pattern="video ?(.*)",allow_sudo=True))
 async def get_media(event):
     reply_message = await event.get_reply_message()
-    k = await event.edit("post gönderiliyor...")
+    k = await event.edit("VİDEO GÖNDERİLDİ")
     # print(reply_message)
     if reply_message:
         await asyncio.sleep(1.2)
