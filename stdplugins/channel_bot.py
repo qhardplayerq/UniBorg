@@ -43,7 +43,7 @@ async def get_media(event):
 @borg.on(admin_cmd(pattern="post ?(.*)",allow_sudo=True))
 async def get_media(event):
     reply_message = await event.get_reply_message()
-    k = await event.edit("post gönderiliyor...")
+    k = await event.edit("post gönderildi")
     # print(reply_message)
     if reply_message:
         await event.client.send_message(
