@@ -17,12 +17,13 @@ DEL_TIME_OUT = 3
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
  
- @borg.on(admin_cmd(pattern="deneme ?(.*)",allow_sudo=True))
+ @borg.on(admin_cmd(pattern="denemee ?(.*)",allow_sudo=True))
 async def get_media(event):
     reply_message = await event.get_reply_message()
     k = await event.edit("post gönderildi")
     # print(reply_message)
     if reply_message:
+      await asyncio.sleep(1.2)
         await event.client.send_message(
             entity=await event.client.get_entity("https://t.me/joinchat/AAAAAE1Vm-ykJxyHbCkJpg"),
             message=reply_message
@@ -33,5 +34,5 @@ await asyncio.sleep(1.2)
     else:
         await k.edit("mesajı yanıtla lan :)")
 #     await k.edit("mesaj tüm kanallara gönderildi")  
-
-await k.delete()
+await asyncio.sleep(1.2)
+k.delete()
