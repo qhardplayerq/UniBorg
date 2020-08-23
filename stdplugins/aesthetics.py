@@ -2,10 +2,14 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from telethon import events
 import logging
+
+from telethon import events
+
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
 PRINTABLE_ASCII = range(0x21, 0x7f)
 
 

@@ -1,20 +1,19 @@
 """FFMpeg for @UniBorg
 """
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
-import io
+import logging
 import os
 import time
 from datetime import datetime
 
-
+from sample_config import Config
 from uniborg.util import admin_cmd, progress
 
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from sample_config import Config
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
+
 
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = "uniborg.media.ffmpeg"
 
@@ -155,6 +154,7 @@ async def take_screen_shot(video_file, output_directory, ttl):
         return None
 
 # https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
+
 
 async def cult_small_video(video_file, output_directory, start_time, end_time):
     # https://stackoverflow.com/a/13891070/4723940

@@ -5,13 +5,7 @@ Syntax: .exec Code"""
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import asyncio
 import io
-
-import subprocess
 import time
-
-from telethon import events
-from telethon.errors import (MessageEmptyError, MessageNotModifiedError,
-                             MessageTooLongError)
 
 from uniborg.util import admin_cmd
 
@@ -19,10 +13,12 @@ from sample_config import Config
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 @borg.on(admin_cmd(pattern="exec ?(.*)"))
 async def _(event):
-    if event.fwd_from:
+    if event.fwd_from or event.via_bot_id:
         return
     DELAY_BETWEEN_EDITS = 0.3
     PROCESS_RUN_TIME = 100

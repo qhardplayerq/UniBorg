@@ -1,23 +1,22 @@
 """IX.IO pastebin like site
 Syntax: .paste"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-import asyncio
 import os
 from datetime import datetime
 
 import requests
-from telethon import events
-
-from uniborg.util import admin_cmd
 
 from sample_config import Config
+from uniborg.util import admin_cmd
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 
 def progress(current, total):
-    logger.info("Downloaded {} of {}\nCompleted {}".format(current, total, (current / total) * 100))
-
+    logger.info("Downloaded {} of {}\nCompleted {}".format(
+        current, total, (current / total) * 100))
 
 @borg.on(admin_cmd(pattern="paste ?(.*)"))
 async def _(event):

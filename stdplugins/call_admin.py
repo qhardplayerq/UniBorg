@@ -1,11 +1,14 @@
 """.admin Plugin for @UniBorg"""
-import asyncio
-from telethon import events
-from telethon.tl.types import ChannelParticipantsAdmins
-from uniborg.util import admin_cmd
 import logging
+
+from telethon.tl.types import ChannelParticipantsAdmins
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 @borg.on(admin_cmd(pattern="spamadmin"))
 async def _(event):

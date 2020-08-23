@@ -21,20 +21,9 @@
 
 import logging
 
-from telethon.errors import ImageProcessFailedError, PhotoCropSizeSmallError
-from telethon.errors.rpcerrorlist import (PhotoExtInvalidError,
-                                          UsernameOccupiedError)
-from telethon.tl.functions.account import (UpdateProfileRequest,
-                                           UpdateUsernameRequest)
-from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest
 from telethon.tl.functions.photos import (DeletePhotosRequest,
-                                          GetUserPhotosRequest,
-                                          UploadProfilePhotoRequest)
-from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import (Channel, Chat, InputPhoto,
-                               MessageEntityMentionName, MessageMediaPhoto,
-                               User)
-from telethon.utils import get_input_location
+                                          GetUserPhotosRequest)
+from telethon.tl.types import InputPhoto
 
 from uniborg.util import admin_cmd
 
@@ -42,6 +31,8 @@ logger = logging.getLogger(__name__)
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 @borg.on(admin_cmd(pattern="delpf ?(.*)"))
 async def remove_profilepic(delpfp):
@@ -97,8 +88,8 @@ if 1 == 1:
                     await event.edit("`ID number you entered is invalid`")
                     return
             except:
-                 await event.edit("`Are you Comedy Me ?`")
-                 return
+                await event.edit("`Are you Comedy Me ?`")
+                return
             if int(id) <= (len(photos)):
                 send_photos = await event.client.download_media(photos[id - 1])
                 await borg.send_file(event.chat_id, send_photos)

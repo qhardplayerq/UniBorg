@@ -3,23 +3,25 @@ Syntax:
 .rnupload file.name
 .rnstreamupload file.name
 By @Ck_ATR"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import math
 import os
 import time
 from datetime import datetime
 
-from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo
-
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
+from pySmartDL import SmartDL
 from sample_config import Config
+from uniborg.util import admin_cmd, humanbytes, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
@@ -56,12 +58,12 @@ async def _(event):
         speed = downloader.get_speed()
         elapsed_time = round(diff) * 1000
         progress_str = "[{0}{1}]\nProgress: {2}%".format(
-            ''.join(["█" for i in range(math.floor(percentage / 5))]),
-            ''.join(["░" for i in range(20 - math.floor(percentage / 5))]),
+            ''.join("█" for i in range(math.floor(percentage / 5))),
+            ''.join("░" for i in range(20 - math.floor(percentage / 5))),
             round(percentage, 2))
         estimated_total_time = downloader.get_eta(human=True)
         try:
-            current_message = f"trying to download\n"
+            current_message = "trying to download\n"
             current_message += f"URL: {url}\n"
             current_message += f"File Name: {file_name}\n"
             current_message += f"{progress_str}\n"

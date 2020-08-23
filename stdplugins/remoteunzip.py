@@ -1,23 +1,15 @@
+from sample_config import Config
+from uniborg.util import admin_cmd
+from hachoir.parser import createParser
+from hachoir.metadata import extractMetadata
+from telethon.tl.types import DocumentAttributeVideo
+from remotezip import RemoteZip
+import os
 import logging
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import asyncio
-import os
-import re
-import time
-import zipfile
-from datetime import datetime
-from zipfile import ZipFile
+logger = logging.getLogger(__name__)
 
-from pySmartDL import SmartDL
-from remotezip import RemoteZip
-from telethon import events
-from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
-
-from sample_config import Config
 
 filedir = f"{Config.TMP_DOWNLOAD_DIRECTORY}extracted/"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
@@ -65,7 +57,8 @@ async def _(event):
                         if metadata.has("duration"):
                             duration = metadata.get('duration').seconds
                         if os.path.exists(thumb_image_path):
-                            metadata = extractMetadata(createParser(thumb_image_path))
+                            metadata = extractMetadata(
+                                createParser(thumb_image_path))
                             if metadata.has("width"):
                                 width = metadata.get("width")
                             if metadata.has("height"):
@@ -112,7 +105,6 @@ async def _(event):
             #                     # )
             #                 )
             # # await event.edit(reply)
-
 
 
 def get_lst_of_files(input_directory, output_lst):

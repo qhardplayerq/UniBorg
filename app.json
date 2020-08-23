@@ -25,10 +25,6 @@
       "description": "Get this value from my.telegram.org! Please do not steal",
       "value": ""
     },
-    "HU_STRING_SESSION": {
-      "description": "Get this value by running python3 GenerateStringSession.py locally",
-      "value": ""
-    },
     "OPEN_WEATHER_MAP_APPID": {
       "description": "Get your own APPID from https://api.openweathermap.org/data/2.5/weather",
       "required": false
@@ -81,12 +77,10 @@
       "required": false
     },
     "TG_BOT_TOKEN_BF_HER": {
-      "description": "Obtain a Telegram bot token by contacting @BotFather",
-      "required": false
+      "description": "Obtain a Telegram bot token by contacting @BotFather"
     },
     "TG_BOT_USER_NAME_BF_HER": {
-      "description": "Obtain a Telegram bot @username by contacting @BotFather",
-      "required": false
+      "description": "Obtain a Telegram bot @username by contacting @BotFather"
     },
     "REM_BG_API_KEY": {
       "description": "Get your own API key from https://www.remove.bg/ or feel free to use http://telegram.dog/Remove_BGBot",
@@ -137,25 +131,46 @@
     "MAX_FLOOD_IN_P_M_s": {
       "description": "define the number of messages that should be considered as 'spam' in PMs",
       "required": false
+    },
+    "LOGSPAMMER": {
+      "description": "PM stuff",
+      "required": true
+    },
+    "SPAM_WATCH_API": {
+      "description": "spamwatch api key",
+      "required": false
+    },
+    "SPAM_WATCHAPI": {
+      "description": "spamwatch api on/off",
+      "required": false
     }
   },
-  "addons": [{
-    "plan": "heroku-postgresql",
-    "options": {
-      "version": "9.5"
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "12"
+      }
     }
-  }],
-  "buildpacks": [{
-    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-  }, {
-    "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
-  }, {
-    "url": "https://github.com/HasibulKabir/heroku-buildpack-p7zip"
-  }, {
-    "url": "https://github.com/hugovelias/heroku-buildpack-youtube-dl"
-  }, {
-    "url": "https://github.com/amivin/aria2-heroku"
-    }, {
-    "url": "heroku/python"
-  }]
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    },
+    {
+      "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
+    },
+    {
+      "url": "https://github.com/HasibulKabir/heroku-buildpack-p7zip"
+    },
+    {
+      "url": "https://github.com/hugovelias/heroku-buildpack-youtube-dl"
+    },
+    {
+      "url": "https://github.com/amivin/aria2-heroku"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
 }

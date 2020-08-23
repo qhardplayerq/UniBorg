@@ -26,9 +26,10 @@
 Userbot module to help you manage a group.
 """
 
+import asyncio
 from asyncio import sleep
 from os import remove
-import asyncio
+
 from telethon import events
 from telethon.errors import (BadRequestError, ChatAdminRequiredError,
                              ImageProcessFailedError, PhotoCropSizeSmallError,
@@ -86,6 +87,7 @@ UNMUTE_RIGHTS = ChatBannedRights(
     send_messages=False
 )
 
+
 @borg.on(events.NewMessage(outgoing=True, pattern="^.setgic$"))
 async def setgrouppic(eventPic):
     if not eventPic.text[0].isalpha() and eventPic.text[0] not in ("/", "#", "@", "!"):
@@ -108,8 +110,8 @@ async def setgrouppic(eventPic):
             if photo:
                 try:
                     await eventPic.client(EditPhotoRequest(
-                    eventPic.chat_id,
-                    await eventPic.client.upload_file(photo)
+                        eventPic.chat_id,
+                        await eventPic.client.upload_file(photo)
                     ))
                     await eventPic.edit("`Chat Picture Changed`")
 
@@ -151,7 +153,7 @@ async def promote(eventPromote):
                     eventPromote.chat_id,
                     user.id,
                     newAdminRights,
-                    rank = ""
+                    rank=""
                 )
             )
             await eventPromote.edit("`Başarıyla yetkilendirildi!`")
@@ -196,7 +198,7 @@ async def demote(eventDemote):
                     eventDemote.chat_id,
                     user.id,
                     newAdminRights,
-                    rank = ""
+                    rank=""
                 )
             )
         except BadRequestError:
@@ -293,7 +295,8 @@ async def listbots(eventListBots):
             reply_to=eventListBots.id,
         )
         remove("botlist.txt")
-            
+
+
 @borg.on(events.NewMessage(outgoing=True, pattern="^.unban(?: |$)(.*)"))
 async def unban(eventUnban):
     if not eventUnban.text[0].isalpha() and eventUnban.text[0] \
@@ -723,9 +726,9 @@ async def list_users(eventListUsers):
             await eventListUsers.edit(mentions)
         except MessageTooLongError:
             await eventListUsers.edit("Damn, this is a huge group. Uploading users lists as file.")
-            file = open("userslist.txt", "w+")
-            file.write(mentions)
-            file.close()
+            with open("userslist.txt", "w+", encoding="utf-8") as file:
+                file.write(mentions)
+                file.close()
             await eventListUsers.client.send_file(
                 eventListUsers.chat_id,
                 "userslist.txt",
@@ -734,18 +737,27 @@ async def list_users(eventListUsers):
             )
             remove("userslist.txt")
 
+
 @borg.on(admin_cmd(pattern="undlt ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
     c = await event.get_chat()
+    file_ = event.pattern_match.group(1)
     if c.admin_rights or c.creator:
-        a = await borg.get_admin_log(event.chat_id,limit=5, edit=False, delete=True)
-        # print(a[0].old.message)
-        deleted_msg = "Deleted message in this group:"
-        for i in a:
-            deleted_msg += "\n👉`{}`".format(i.old.message)
-        await event.edit(deleted_msg)
+        if file_ == "media":
+            await event.edit("`silinmiş medya getiriliyor`")
+            async for j in event.client.iter_admin_log(event.chat_id, delete=True):
+                if j.old.media is not None:
+                    x = await event.client.download_media(j.old.media)
+                    await event.client.send_message(entity=event.chat_id, file=x)
+        else:
+            a = await borg.get_admin_log(event.chat_id, limit=10, edit=False, delete=True)
+            deleted_msg = "Deleted message in this group:"
+            for i in a:
+                if i.old.message != "":
+                    deleted_msg += "\n👉`{}`".format(i.old.message)
+                    await event.edit(deleted_msg)
     else:
         await event.edit("`You need administrative permissions in order to do this command`")
         await asyncio.sleep(3)
@@ -776,6 +788,7 @@ async def get_user_from_event(event):
             await event.edit(str(err))
             return None
     return user_obj
+
 
 async def get_user_from_id(user, event):
     if isinstance(user, str):

@@ -6,24 +6,24 @@ Available Commands:
 .upload <Path To File>
 .uploadir <Path To Directory>
 .uploadasstream <Path To File>"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import os
 import subprocess
 import time
 from datetime import datetime
 
-import requests
-from telethon import events
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
-
-from uniborg.util import admin_cmd, progress
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
+from uniborg.util import admin_cmd, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
@@ -50,8 +50,8 @@ async def _(event):
         logger.info(lst_of_files)
         u = 0
         await event.edit(
-            "Found {} files. ".format(len(lst_of_files)) + \
-            "Uploading will start soon. " + \
+            "Found {} files. ".format(len(lst_of_files)) +
+            "Uploading will start soon. " +
             "Please wait!"
         )
         thumb = None
@@ -171,9 +171,11 @@ async def _(event):
             )
         )
         end = datetime.now()
-        #os.remove(input_str)
+        # os.remove(input_str)
         ms = (end - start).seconds
-        await mone.edit("Uploaded in {} seconds.".format(ms))
+        j = await mone.edit("Uploaded in {} seconds.".format(ms))
+        await asyncio.sleep(2)
+        await j.delete()
     else:
         await mone.edit("404: File Not Found")
 
@@ -182,7 +184,8 @@ def get_video_thumb(file, output=None, width=90):
     metadata = extractMetadata(createParser(file))
     p = subprocess.Popen([
         'ffmpeg', '-i', file,
-        '-ss', str(int((0, metadata.get('duration').seconds)[metadata.has('duration')] / 2)),
+        '-ss', str(int((0, metadata.get('duration').seconds)
+                       [metadata.has('duration')] / 2)),
         '-filter:v', 'scale={}:-1'.format(width),
         '-vframes', '1',
         output,
@@ -202,8 +205,8 @@ async def _(event):
     if os.path.exists(file_name):
         if not file_name.endswith((".mkv", ".mp4", ".mp3", ".flac")):
             await mone.edit(
-                "Sorry. But I don't think {} is a streamable file.".format(file_name) + \
-                " Please try again.\n" + \
+                "Sorry. But I don't think {} is a streamable file.".format(file_name) +
+                " Please try again.\n" +
                 "**Supported Formats**: MKV, MP4, MP3, FLAC"
             )
             return False

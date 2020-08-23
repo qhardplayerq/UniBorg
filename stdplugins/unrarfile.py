@@ -2,32 +2,24 @@
 coded by @By_Azade
 """
 
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
 import asyncio
+import logging
 import os
+import shutil
 import time
-
 from datetime import datetime
 
+from telethon.tl.types import DocumentAttributeVideo
+
 import patoolib
-import subprocess
-
-from pySmartDL import SmartDL
-from telethon import events
-from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
-
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
-
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from sample_config import Config
+from uniborg.util import admin_cmd, progress
 
-
-
-
-
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="unrar"))
@@ -80,7 +72,8 @@ async def _(event):
                     if metadata.has("duration"):
                         duration = metadata.get('duration').seconds
                     if os.path.exists(thumb_image_path):
-                        metadata = extractMetadata(createParser(thumb_image_path))
+                        metadata = extractMetadata(
+                            createParser(thumb_image_path))
                         if metadata.has("width"):
                             width = metadata.get("width")
                         if metadata.has("height"):
@@ -118,11 +111,8 @@ async def _(event):
                     continue
                 os.remove(single_file)
         os.remove(downloaded_file_name)
-
-
-
-
-
+    await asyncio.sleep(2)
+    shutil.rmtree(Config.TMP_DOWNLOAD_DIRECTORY)
 
 
 def get_lst_of_files(input_directory, output_lst):
@@ -133,6 +123,3 @@ def get_lst_of_files(input_directory, output_lst):
             return get_lst_of_files(current_file_name, output_lst)
         output_lst.append(current_file_name)
     return output_lst
-
-        
-            

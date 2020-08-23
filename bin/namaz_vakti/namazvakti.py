@@ -5,7 +5,6 @@ from datetime import datetime
 import requests 
 from bs4 import BeautifulSoup
 from convertdate import islamic
-import pathlib
 
 
 
@@ -59,7 +58,7 @@ class namazvakti():
         dosyaYolu = os.path.join("./bin/namaz_vakti/db/")
 
         # Önce cache bellek işlemleri
-        if cacheklasoru != None:
+        if cacheklasoru is not None:
             self.__cache = cacheklasoru;
         else:
             self.__cache = os.path.join(dosyaYolu, self.__cacheKlasorYolu)
@@ -99,7 +98,7 @@ class namazvakti():
 
             ulke = self.__veritabani[str(ulke_id)]
             sehirListesi = {}
-            if ulke["ilce_listesi_varmi"] == True:
+            if ulke["ilce_listesi_varmi"]:
 
                 liste = []
                 for i in ulke["sehirler"]:
@@ -137,7 +136,7 @@ class namazvakti():
             ulke = self.__veritabani[str(ulke_id)]
 
             # ilçeleri varsa dönelim!
-            if ulke["ilce_listesi_varmi"] == True:
+            if ulke["ilce_listesi_varmi"]:
                 # şehir id geçerliyse
                 if str(sehir_id) in ulke["sehirler"]:
                     sonuc["durum"] = "basarili"
@@ -233,7 +232,8 @@ class namazvakti():
         return sonuc
 
     # Yer ile ilgili bilinmesi gerekenleri verir!
-    def __yerBilgisi(self, sehir_id):
+    @staticmethod
+    def __yerBilgisi(sehir_id):
 
         # adres dosyası
         adresDosyasi = os.path.join(os.path.join("./bin/namaz_vakti/"), "db", "adresler.ndb")
@@ -250,7 +250,7 @@ class namazvakti():
     # sunucudan çekilen bozuk tarihi düzeltir dd.mm.YYYY şeklinde döndürür!
     def __tarihDuzelt(self, bozukTarih):
         bozulanTarih = bozukTarih.split(" ")
-        aylar = dict((v,k) for k, v in self.__miladiAylar.items())
+        aylar = {v:k for k, v in self.__miladiAylar.items()}
         gun = bozulanTarih[0]
         ay = aylar[bozulanTarih[1]]
         if ay < 10:
@@ -261,7 +261,8 @@ class namazvakti():
         return (gun + "." + ay + "." + yil)
 
     # tarih için verilen sayılarda 10 dan küçük olanlar için başına sıfır koyar stringe çevirir, yoksa sadece stringe çevirir!
-    def __sifirla(self, sayi):
+    @staticmethod
+    def __sifirla(sayi):
         if sayi < 10:
             return "0" + str(sayi)
         else:

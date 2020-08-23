@@ -3,19 +3,16 @@ Syntax: .userlist"""
 import logging
 import os
 
-from telethon import errors, events
+from telethon import events
 from telethon.errors.rpcerrorlist import (ChatAdminRequiredError,
-                                          MessageTooLongError,
-                                          UserIdInvalidError)
-from telethon.tl.types import (ChannelParticipantAdmin,
-                               ChannelParticipantCreator,
-                               ChannelParticipantsAdmins)
+                                          MessageTooLongError)
 
-from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-                                          
+logger = logging.getLogger(__name__)
+
+
 @borg.on(events.NewMessage(pattern=r"\.userlists ?(.*)", outgoing=True))
 async def get_users(show):
     """ For .userslist command, list all of the users of the chat. """
@@ -46,9 +43,9 @@ async def get_users(show):
             await show.edit(mentions)
         except MessageTooLongError:
             await show.edit("Damn, this is a huge group. Uploading users lists as file.")
-            file = open("userslist.txt", "w+")
-            file.write(mentions)
-            file.close()
+            with open("userslist.txt", "w+", encoding="utf-8") as file:
+                file.write(mentions)
+                file.close()
             await show.client.send_file(
                 show.chat_id,
                 "userslist.txt",

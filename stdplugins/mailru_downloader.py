@@ -1,24 +1,15 @@
+import asyncio
+import io
 import logging
+import time
+from datetime import datetime
+
+from sample_config import Config
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-import asyncio
-import os
-import shutil
-import subprocess
-import time
-from pySmartDL import SmartDL
-from sample_config import Config
-from telethon import events
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
-import subprocess
-import patoolib
-from bin.cmrudl import *
-from datetime import datetime
-import io
-
-
-
-
+logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern=("cmrdl ?(.*)")))
 async def _(event):
@@ -39,12 +30,12 @@ async def _(event):
         reply_to_id = event.reply_to_msg_id
     start_time = time.time() + PROCESS_RUN_TIME
     process = await asyncio.create_subprocess_shell(
-        command_to_exec, 
-        stdout=asyncio.subprocess.PIPE, 
+        command_to_exec,
+        stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE
     )
     logger.info(command_to_exec)
-    OUTPUT = f"**Files in DOWNLOADS folder:**\n"
+    OUTPUT = "**Files in DOWNLOADS folder:**\n"
     stdout, stderr = await process.communicate()
     t_response = stdout.decode().strip()
     if len(stdout) > Config.MAX_MESSAGE_SIZE_LIMIT:
@@ -65,4 +56,3 @@ async def _(event):
                 caption=f"`{full_file_name}`",
                 reply_to=reply_to_id
             )
-

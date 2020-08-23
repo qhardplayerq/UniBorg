@@ -1,15 +1,14 @@
 """ Get the Bots in any chat*
 Syntax: .get_bot"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-from telethon import events
+
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
 
 from uniborg.util import admin_cmd
 
-from sample_config import Config
-
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern="get_bot ?(.*)"))
 async def _(event):
@@ -31,9 +30,11 @@ async def _(event):
     try:
         async for x in borg.iter_participants(chat, filter=ChannelParticipantsBots):
             if isinstance(x.participant, ChannelParticipantAdmin):
-                mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(x.first_name, x.id, x.id)
+                mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(
+                    x.first_name, x.id, x.id)
             else:
-                mentions += "\n [{}](tg://user?id={}) `{}`".format(x.first_name, x.id, x.id)
+                mentions += "\n [{}](tg://user?id={}) `{}`".format(
+                    x.first_name, x.id, x.id)
     except Exception as e:
         mentions += " " + str(e) + "\n"
     await event.edit(mentions)

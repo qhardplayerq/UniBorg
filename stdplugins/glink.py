@@ -7,29 +7,29 @@ Syntax:
 # there might be some changes made to suit the needs for this repository
 # Licensed under MIT License
 
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-import aiohttp
 import asyncio
+import logging
 import math
 import os
+import ssl
 import time
-from pySmartDL import SmartDL
-from telethon import events
 from datetime import datetime
+from mimetypes import guess_type
+
+import httplib2
+from telethon import events
+
 from apiclient.discovery import build
 from apiclient.http import MediaFileUpload
-from apiclient.errors import ResumableUploadError
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
-from oauth2client import file, client, tools
-from mimetypes import guess_type
-import httplib2
-import subprocess
-from uniborg.util import admin_cmd, progress, humanbytes, time_formatter
-import ssl
+from pySmartDL import SmartDL
 from sample_config import Config
+from uniborg.util import admin_cmd, humanbytes, progress
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Config.TMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"
 # Copy your credentials from the APIs Console
@@ -43,7 +43,6 @@ REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"
 parent_id = Config.GDRIVE_FOLDER_ID
 
 
-
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -52,6 +51,7 @@ except AttributeError:
 else:
     # Handle target environment that doesn't support HTTPS verification
     ssl._create_default_https_context = _create_unverified_https_context
+
 
 @borg.on(admin_cmd(pattern="glink ?(.*)", allow_sudo=True))
 async def download(dryb):
@@ -89,8 +89,9 @@ async def download(dryb):
                 speed = downloader.get_speed()
                 elapsed_time = round(diff) * 1000
                 progress_str = "[{0}{1}]\nProgress: {2}%".format(
-                    ''.join(["█" for i in range(math.floor(percentage / 5))]),
-                    ''.join(["░" for i in range(20 - math.floor(percentage / 5))]),
+                    ''.join("█" for i in range(math.floor(percentage / 5))),
+                    ''.join("░" for i in range(
+                        20 - math.floor(percentage / 5))),
                     round(percentage, 2))
                 estimated_total_time = downloader.get_eta(human=True)
                 try:
@@ -124,7 +125,7 @@ async def download(dryb):
                         progress(d, t, dryb, c_time, "Downloading...")
                     )
                 )
-            except Exception as e: # pylint:disable=C0103,W0703
+            except Exception as e:  # pylint:disable=C0103,W0703
                 await dryb.edit(str(e))
             else:
                 end = datetime.now()
@@ -227,22 +228,24 @@ async def upload_file(http, file_path, file_name, mime_type, event):
         if status:
             percentage = int(status.progress() * 100)
             progress_str = "[{0}{1}]\nProgress: {2}%\n".format(
-                ''.join(["█" for i in range(math.floor(percentage / 5))]),
-                ''.join(["░" for i in range(20 - math.floor(percentage / 5))]),
+                ''.join("█" for i in range(math.floor(percentage / 5))),
+                ''.join("░" for i in range(20 - math.floor(percentage / 5))),
                 round(percentage, 2))
             await event.edit(f"Uploading to Google Drive...\n\nFile Name: {file_name}\n{progress_str}")
     if file:
         await event.edit(file_name + " Uploaded Successfully")
     # Insert new permissions
-    drive_service.permissions().insert(fileId=response.get('id'), body=permissions).execute()
+    drive_service.permissions().insert(
+        fileId=response.get('id'), body=permissions).execute()
     # Define file instance and get url for download
     file = drive_service.files().get(fileId=response.get('id')).execute()
     download_url = response.get("webContentLink")
     return download_url
 
+
 @borg.on(admin_cmd(pattern="gfolder ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    folder_link =f"https://drive.google.com/drive/u/2/folders/"+parent_id
+    folder_link = "https://drive.google.com/drive/u/2/folders/"+parent_id
     await event.edit(f"Your current Google Drive Upload Directory : [Here]({folder_link})")

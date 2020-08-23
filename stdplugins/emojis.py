@@ -4,12 +4,15 @@ Available Commands:
 .emoji apple
 .emoji :/
 .emoji -_-"""
-from telethon import events
 import asyncio
-from uniborg.util import admin_cmd
 import logging
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 @borg.on(admin_cmd(pattern="emoji (.*)"))
 async def _(event):

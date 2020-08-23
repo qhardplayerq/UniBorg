@@ -6,16 +6,12 @@ import os
 import sys
 
 from telethon import events
-from telethon.tl import functions, types
-from telethon.tl.types import Channel, Chat, User
 
 from sample_config import Config
-from uniborg.util import admin_cmd
+
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.WARN)
-
-global NO_PM_LOG_USERS
 NO_PM_LOG_USERS = []
 
 
@@ -33,11 +29,11 @@ async def monito_p_m_s(event):
                     silent=True
                 )
             except Exception as e:
-                # logger.warn(str(e))
+                # logger.warning(str(e))
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
                 print(exc_type, fname, exc_tb.tb_lineno)
-                print(e) 
+                print(e)
 
 
 @borg.on(events.NewMessage(pattern="nolog ?(.*)"))

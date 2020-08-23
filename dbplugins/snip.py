@@ -1,41 +1,61 @@
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
 """Snips
 Available Commands:
 .snips
 .snipl
 .snipd"""
-from telethon import events, utils
-from telethon.tl import types
-from sql_helpers.snips_sql import get_snips, add_snip, remove_snip, get_all_snips
-from uniborg.util import admin_cmd
+
 import logging
+
+from sample_config import Config
+from sql_helpers.snips_sql import (add_snip, get_all_snips, get_snips,
+                                   remove_snip)
+from uniborg.util import admin_cmd
+
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 @borg.on(admin_cmd(pattern=r'\#(\S+)', outgoing=True))
 async def on_snip(event):
+    # await event.delete()
     name = event.pattern_match.group(1)
     snip = get_snips(name)
+    if not event.is_group:
+        await event.delete()
+    reply_message = await event.get_reply_message()
     if snip:
         msg_o = await event.client.get_messages(
             entity=Config.PRIVATE_CHANNEL_BOT_API_ID,
             ids=int(snip.f_mesg_id)
         )
-        message_id = event.message.id
-        if event.reply_to_msg_id:
-            message_id = event.reply_to_msg_id
-        media_message = msg_o.media
-        if isinstance(media_message, types.MessageMediaWebPage):
-            media_message = None
-        await event.client.send_message(
-            event.chat_id,
-            msg_o.message,
-            reply_to=message_id,
-            file=media_message
-        )
-        await event.delete()
+        if msg_o.media is not None:
+            if reply_message:
+                await event.client.send_file(
+                    event.chat_id,
+                    msg_o.media,
+                    supports_streaming=True,
+                    reply_to=reply_message.id
+                )
+            else:
+                await event.client.send_file(
+                    event.chat_id,
+                    msg_o.media,
+                    supports_streaming=True
+                )
+        else:
+            if reply_message:
+                await event.client.send_message(
+                    entity=event.chat_id,
+                    message=msg_o.message,
+                    reply_to=reply_message.id
+                )
+            else:
+                await event.client.send_message(
+                    entity=event.chat_id,
+                    message=msg_o.message
+                )
 
 
 @borg.on(admin_cmd(pattern="snips (.*)"))

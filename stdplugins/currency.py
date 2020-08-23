@@ -1,13 +1,16 @@
 """Currency Converter Plugin for @UniBorg
 Syntax: .currency number from to"""
-from telethon import events
-import asyncio
-from datetime import datetime
-import requests
-from uniborg.util import admin_cmd
 import logging
+from datetime import datetime
+
+import requests
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 @borg.on(admin_cmd(pattern="currency (.*)"))
 async def _(event):
@@ -21,7 +24,8 @@ async def _(event):
             number = float(input_sgra[0])
             currency_from = input_sgra[1].upper()
             currency_to = input_sgra[2].upper()
-            request_url = "https://api.exchangeratesapi.io/latest?base={}".format(currency_from)
+            request_url = "https://api.exchangeratesapi.io/latest?base={}".format(
+                currency_from)
             current_response = requests.get(request_url).json()
             if currency_to in current_response["rates"]:
                 current_rate = float(current_response["rates"][currency_to])

@@ -4,11 +4,14 @@ Pluggable [``asyncio``](https://docs.python.org/3/library/asyncio.html)
 [Telegram](https://telegram.org) userbot based on
 [Telethon](https://github.com/LonamiWebs/Telethon).
 
-## installing
+/**
+// **DISCLAIMER**
 
-#### The Easy Way
+// multiple accounts are getting banned,
+// hence, please do not deploy this REPOsitory
+ */
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/muhammedfurkan/UniBorg)
 
 #### Other way 
 
@@ -18,12 +21,16 @@ Pluggable [``asyncio``](https://docs.python.org/3/library/asyncio.html)
 
 [![DeepSource](https://static.deepsource.io/deepsource-badge-light-mini.svg)](https://deepsource.io/gh/muhammedfurkan/UniBorg/?ref=repository-badge)
 
+### Code Quality
+
+[![CodeFactor](https://www.codefactor.io/repository/github/muhammedfurkan/uniborg/badge)](https://www.codefactor.io/repository/github/muhammedfurkan/uniborg)
+
 #### The Legacy Way
 Simply clone the repository and run the main file:
 ```sh
 git clone https://github.com/muhammedfurkan/uniborg.git
 cd uniborg
-virtualenv -p /usr/bin/python3 venv
+python3 -m venv venv
 . ./venv/bin/activate
 pip install -r requirements.txt
 # <Create config.py with variables as given below>
@@ -53,7 +60,6 @@ class Development(Config):
     -1001330468518,
     -1001221185967,
     -1001340243678,
-    -1001311056733,
     -1001135438308,
     -1001038774929,
     -1001070622614,

@@ -1,9 +1,11 @@
 """Syntax: .whatscrapp as reply to a message copied from @WhatsCRApp"""
 import logging
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from telethon import events
-from uniborg.util import admin_cmd
+logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="whatscrapp"))

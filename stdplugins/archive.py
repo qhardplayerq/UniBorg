@@ -8,28 +8,22 @@ Coded by @By_Azade
 """
 
 
-
 import asyncio
+import logging
 import os
-import shutil
 import subprocess
 import time
-from pySmartDL import SmartDL
-from sample_config import Config
-from telethon import events
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
-import subprocess
+
 import patoolib
-import logging
+from sample_config import Config
+from uniborg.util import admin_cmd, progress
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 extracted = Config.TMP_DOWNLOAD_DIRECTORY + "extracted/"
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
-
-
-
-
 
 @borg.on(admin_cmd(pattern=("rar ?(.*)")))
 async def _(event):
@@ -52,9 +46,8 @@ async def _(event):
             )
             directory_name = downloaded_file_name
             await event.edit("creating rar archive, please wait..")
-            # patoolib.create_archive(directory_name + '.7z',directory_name)
-            patoolib.create_archive(directory_name + ".rar",(directory_name,Config.TMP_DOWNLOAD_DIRECTORY))
-            # patoolib.create_archive("/content/21.yy Avrupa (1).pdf.zip",("/content/21.yy Avrupa (1).pdf","/content/"))
+            patoolib.create_archive(
+                directory_name + ".rar", (directory_name, Config.TMP_DOWNLOAD_DIRECTORY))
             await borg.send_file(
                 event.chat_id,
                 directory_name + ".rar",
@@ -67,19 +60,16 @@ async def _(event):
                 os.remove(directory_name + ".rar")
                 os.remove(directory_name)
             except:
-                    pass
+                pass
             await event.edit("Task Completed")
             await asyncio.sleep(3)
             await event.delete()
-        except Exception as e:  # pylint:disable=C0103,W0703
+        except Exception as e:
             await mone.edit(str(e))
     elif input_str:
         directory_name = input_str
-        
+
         await event.edit("Local file compressed to `{}`".format(directory_name + ".rar"))
-
-
-
 
 @borg.on(admin_cmd(pattern=("7z ?(.*)")))
 async def _(event):
@@ -103,7 +93,8 @@ async def _(event):
             directory_name = downloaded_file_name
             await event.edit("creating 7z archive, please wait..")
             # patoolib.create_archive(directory_name + '.7z',directory_name)
-            patoolib.create_archive(directory_name + ".7z",(directory_name,Config.TMP_DOWNLOAD_DIRECTORY))
+            patoolib.create_archive(
+                directory_name + ".7z", (directory_name, Config.TMP_DOWNLOAD_DIRECTORY))
             # patoolib.create_archive("/content/21.yy Avrupa (1).pdf.zip",("/content/21.yy Avrupa (1).pdf","/content/"))
             await borg.send_file(
                 event.chat_id,
@@ -117,7 +108,7 @@ async def _(event):
                 os.remove(directory_name + ".7z")
                 os.remove(directory_name)
             except:
-                    pass
+                pass
             await event.edit("Task Completed")
             await asyncio.sleep(3)
             await event.delete()
@@ -125,7 +116,7 @@ async def _(event):
             await mone.edit(str(e))
     elif input_str:
         directory_name = input_str
-        
+
         await event.edit("Local file compressed to `{}`".format(directory_name + ".7z"))
 
 
@@ -151,11 +142,12 @@ async def _(event):
             directory_name = downloaded_file_name
             await event.edit("Finish downloading to my local")
             command_to_exec = [
-                    "7z",
-                    "e",
-                    "-o" + extracted,
-                    directory_name]
-            sp = subprocess.Popen(command_to_exec, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+                "7z",
+                "e",
+                "-o" + extracted,
+                directory_name]
+            sp = subprocess.Popen(
+                command_to_exec, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
             await borg.send_file(
                 event.chat_id,
                 directory_name + ".zip",
@@ -168,7 +160,7 @@ async def _(event):
                 os.remove(directory_name + ".zip")
                 os.remove(directory_name)
             except:
-                    pass
+                pass
             await event.edit("Task Completed")
             await asyncio.sleep(3)
             await event.delete()
@@ -176,5 +168,5 @@ async def _(event):
             await mone.edit(str(e))
     elif input_str:
         directory_name = input_str
-        
+
         await event.edit("Local file compressed to `{}`".format(directory_name + ".zip"))

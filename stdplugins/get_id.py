@@ -1,11 +1,14 @@
 """Get ID of any Telegram media, or any user
 Syntax: .get_id"""
 import logging
+
+from telethon.utils import pack_bot_file_id
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
-from telethon import events
-from telethon.utils import pack_bot_file_id
-from uniborg.util import admin_cmd
+logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="get_id"))

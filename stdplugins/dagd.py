@@ -4,14 +4,16 @@ Available Commands:
 .dns google.com
 .url <long url>
 .unshort <short url>"""
-from telethon import events
-import os
-import requests
-import json
-from uniborg.util import admin_cmd
 import logging
+
+import requests
+
+from uniborg.util import admin_cmd
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
+logger = logging.getLogger(__name__)
+
 
 @borg.on(admin_cmd(pattern="dns (.*)"))
 async def _(event):

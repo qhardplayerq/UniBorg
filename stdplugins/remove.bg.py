@@ -15,22 +15,19 @@
 """Remove.BG Plugin for @UniBorg
 Syntax: .remove.bg https://link.to/image.extension
 Syntax: .remove.bg as reply to a media"""
-import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-import asyncio
 import io
+import logging
 import os
-import time
 from datetime import datetime
 
 import requests
-import telethon
-from telethon import events
-
-from uniborg.util import admin_cmd, progress
 
 from sample_config import Config
+from uniborg.util import admin_cmd
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="remove\.bg ?(.*)"))
@@ -110,7 +107,7 @@ def ReTrieveURL(input_url):
         "X-API-Key": Config.REM_BG_API_KEY,
     }
     data = {
-      "image_url": input_url
+        "image_url": input_url
     }
     r = requests.post(
         "https://api.remove.bg/v1.0/removebg",

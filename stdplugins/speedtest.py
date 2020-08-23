@@ -2,16 +2,14 @@
 Syntax: .speedtest
 Available Options: image, file, text"""
 import logging
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.WARNING)
-import io
 from datetime import datetime
 
-from telethon import events
-
+import speedtest
 from uniborg.util import admin_cmd
 
-import speedtest
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(__name__)
 
 
 @borg.on(admin_cmd(pattern="speedtest ?(.*)"))
