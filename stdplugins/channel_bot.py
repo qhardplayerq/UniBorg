@@ -69,27 +69,11 @@ async def get_media(event):
         
         await asyncio.sleep(1.2)
         await event.client.send_message(
-            entity=await event.client.get_entity("https://t.me/joinchat/AAAAAFO7l8-6EIxXJsRHkg"),
-            message=reply_message
-        )
-        await asyncio.sleep(1.2)
-        await event.client.send_message(
-            entity=await event.client.get_entity("https://t.me/joinchat/AAAAAFU2qUVCJZlvXskiig"),
-            message=reply_message
-        )
-        await asyncio.sleep(1.2)
-        await event.client.send_message(
-            entity=await event.client.get_entity("https://t.me/joinchat/AAAAAEUnlnmhE4z26NdxvQ"),
-            message=reply_message
-        )
-        await asyncio.sleep(1.2)
-        await event.client.send_message(
             entity=await event.client.get_entity("https://t.me/joinchat/AAAAAE_oUYlNq2c45oQRlQ"),
             message=reply_message
         )
-        await asyncio.sleep(1.2)
-
         
+        await asyncio.sleep(1.2)
         # await event.reply(reply_message)
     else:
         await k.edit("mesajı yanıtla lan :)")
