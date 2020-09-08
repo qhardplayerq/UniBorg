@@ -18,5 +18,5 @@ async def get_adzan(event):
     if link:
         api = f"https://ay.link/api/?api=e2bb35a996ea8c9dfa4e5011005730bb584e283f&url={link}&alias&ct=1"
         r = requests.get(api)
-        kisa_link = r['shortenedUrl']
+        kisa_link = r.json()['shortenedUrl']
         await event.edit("Kısaltılmış link:\n()".format(kisa_link))
