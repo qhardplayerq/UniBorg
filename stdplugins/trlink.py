@@ -22,4 +22,4 @@ async def get_adzan(event):
         r_2 = requests.get(api_2)
         kisa_link_2 = r_2.text
         kisa_link = r.json()['shortenedUrl']
-        await event.edit("Kısaltılmış link:\n{}\nAlternatif link: {}".format(kisa_link,kisa_link_2))
+        await event.edit("Kısaltılmış link:point_right:{}\nAlternatif link: {}".format(kisa_link,kisa_link_2))
