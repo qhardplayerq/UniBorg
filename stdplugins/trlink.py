@@ -20,6 +20,6 @@ async def get_adzan(event):
         api_2 = f"http://pubiza.com/api.php?token=snmmRSSLfiZQUGmfZox6k3UjQPEZpLa8&url={link}"
         r = requests.get(api)
         r_2 = requests.get(api_2)
-        kisa_link_2 = r.text
+        kisa_link_2 = r_2.text
         kisa_link = r.json()['shortenedUrl']
         await event.edit("Kısaltılmış link:\n{}\nAlternatif link: {}".format(kisa_link,kisa_link_2))
