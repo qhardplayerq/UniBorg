@@ -26,8 +26,8 @@ async def await_read(chat, message):
 
     await fut
 
-
-@borg.on(slitu.admin_cmd(pattern="(del)(?:ete)?$"))
+#@borg.on(slitu.admin_cmd(pattern="(del)(?:ete)?$"))
+@borg.on(slitu.admin_cmd(pattern="(sil)(?:ete)?$"))
 @borg.on(slitu.admin_cmd(pattern="(edit)(?:\s+(.*))?$"))
 async def delete(event):
     await event.delete()
