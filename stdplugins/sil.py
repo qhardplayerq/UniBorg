@@ -1,6 +1,16 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
 import asyncio
+import logging
+
 from telethon import events
-import telethon.utils
+from telethon.utils import get_peer_id
+from uniborg.util import admin_cmd, is_read
+
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+                    level=logging.WARNING)
+logger = logging.getLogger(name)
 
 
 async def get_target_message(event):
@@ -13,22 +23,22 @@ async def get_target_message(event):
 
 
 async def await_read(chat, message):
-    chat = telethon.utils.get_peer_id(chat)
+    chat = get_peer_id(chat)
 
     async def read_filter(read_event):
         return (read_event.chat_id == chat
                 and read_event.is_read(message))
     fut = borg.await_event(events.MessageRead(inbox=False), read_filter)
 
-    if await slitu.is_read(borg, chat, message):
+    if await is_read(borg, chat, message):
         fut.cancel()
         return
 
     await fut
 
-#@borg.on(slitu.admin_cmd(pattern="(del)(?:ete)?$"))
-@borg.on(slitu.admin_cmd(pattern="(sil)(?:ete)?$"))
-@borg.on(slitu.admin_cmd(pattern="(edit)(?:\s+(.*))?$"))
+
+@borg.on(admin_cmd(pattern="(sil)(?:ete)?$"))
+@borg.on(admin_cmd(pattern="(edit)(?:\s+(.*))?$"))
 async def delete(event):
     await event.delete()
     command = event.pattern_match.group(1)
