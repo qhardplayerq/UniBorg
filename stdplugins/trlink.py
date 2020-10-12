@@ -20,4 +20,4 @@ async def get_adzan(event):
         r = requests.get(api)
 
         kisa_link = r.json()['shortenedUrl']
-        await event.edit("Link👉 {}\n\n📌Reklam Geçmek için👇\n👉 @linkk_gecmee".format(kisa_link))
+        await event.edit("Link👉 {}".format(kisa_link))
