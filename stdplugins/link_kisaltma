@@ -1,6 +1,5 @@
 import json
 import logging
-
 import requests
 
 from uniborg.util import admin_cmd
