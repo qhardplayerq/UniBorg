@@ -18,7 +18,7 @@ async def get_adzan(event):
     if link:
         api = f"https://ay.link/api/?api=e2bb35a996ea8c9dfa4e5011005730bb584e283f&url={link}&alias&ct=1"
         async with aiohttp.ClientSession() as session:
-          async with session.get(url) as response:
+          async with session.get(api) as response:
             ilk = await response.json()
             son = ilk['shortenedUrl']
             await event.edit("Link👉 {}".format(son))
