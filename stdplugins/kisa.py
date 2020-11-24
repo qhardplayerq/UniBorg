@@ -20,7 +20,8 @@ async def get_adzan(event):
         async with aiohttp.ClientSession() as session:
           async with session.get(api) as response:
             ilk = await response.json()
-            son = ilk['shortenedUrl']
+            kk = json.loads(ilk)
+            son = kk['shortenedUrl']
             await event.edit("Link👉 {}".format(son))
 
 
