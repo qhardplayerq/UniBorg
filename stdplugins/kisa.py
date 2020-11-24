@@ -9,13 +9,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
                     level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
-async def main(url):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            ilk = await response.json()
 
-            son = ilk['shortenedUrl']
-            return son
 
 @borg.on(admin_cmd(pattern=("kisalt ?(.*)")))
 async def get_adzan(event):
@@ -23,7 +17,12 @@ async def get_adzan(event):
     link = event.pattern_match.group(1)
     if link:
         api = f"https://ay.link/api/?api=e2bb35a996ea8c9dfa4e5011005730bb584e283f&url={link}&alias&ct=1"
-        klink = await main(api)
+        async with aiohttp.ClientSession() as session:
+          async with session.get(url) as response:
+            ilk = await response.json()
+            son = ilk['shortenedUrl']
+            await event.edit("Link👉 {}".format(son))
+
 
         
-        await event.edit("Link👉 {}".format(klink))
+        
