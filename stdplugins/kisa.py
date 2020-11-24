@@ -1,8 +1,8 @@
 import json
 import logging
 import requests
-from telethon import events
-#from uniborg.util import admin_cmd
+
+from uniborg.util import admin_cmd
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 
-@borg.on(events.NewMessage(pattern=(r"\.kisalt")))
+@borg.on(admin_cmd(pattern=("kisalt ?(.*)")))
 async def get_adzan(event):
     
     link = event.pattern_match.group(1)
