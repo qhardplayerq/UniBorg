@@ -16,7 +16,6 @@ logger = logging.getLogger(__name__)
 
 @borg.on(events.NewMessage(pattern=r"\.smile", outgoing=True))
 async def _(event):
-  await event.delete()
     if event.fwd_from:
         return
     deq = deque(list("😃😄😁😆😅😂🤣🙃"))
@@ -28,7 +27,6 @@ async def _(event):
 
 @borg.on(admin_cmd(pattern="bsmile", outgoing=True))
 async def bkallp(event):
-  await event.delete()
     a = "😃 😄 😁 😆 😅 😂 🤣 🙃".split(" ")
     d = await event.reply("...")
     for t in a:
