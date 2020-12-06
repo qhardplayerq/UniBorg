@@ -47,7 +47,7 @@ async def test(event):
     msg += f"kanal 3 simdiki kullanıcı sayısı {int(simdi3)} kişi\n"
     fark3 = simdi3 - onceki3
     # print(f"kanal 3 aradaki fark {int(fark3)} kişi")
-    msg += "kanal 3 aradaki fark {int(fark3)} kişi\n\n"
+    msg += f"kanal 3 aradaki fark {int(fark3)} kişi\n\n"
 
     channel4 = -1001469818787
     stats4 = await event.client.get_stats(channel4)
