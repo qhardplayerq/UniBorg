@@ -17,7 +17,7 @@ async def test(event):
     stats1 = await event.client.get_stats(channel1)
     onceki1 = stats1.followers.previous
     # print(f"kanal 1 onceki kullanıcı sayısı {int(onceki1)} kişi")
-    msg += "kanal 1 onceki kullanıcı sayısı {int(onceki1)} kişi\n"
+    msg += f"kanal 1 onceki kullanıcı sayısı {int(onceki1)} kişi\n"
     simdi1 = stats1.followers.current
     # print(f"kanal 1simdiki kullanıcı sayısı {int(simdi1)} kişi")
     msg += f"kanal 1simdiki kullanıcı sayısı {int(simdi1)} kişi\n"
