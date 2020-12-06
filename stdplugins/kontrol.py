@@ -1,3 +1,14 @@
+import asyncio
+
+from telethon import errors, functions
+from telethon.tl.types import (InputMessagesFilterDocument,
+                               InputPrivacyValueAllowUsers,
+                               MessageMediaDocument)
+from telethon.tl.types.help import UserInfo
+
+from uniborg.util import admin_cmd, progress
+
+
 @borg.on(admin_cmd(pattern="ist"))
 async def test(event):
     j = await event.edit("`Bekle işlem yapılıyor 6 aylık mısın :)`")
