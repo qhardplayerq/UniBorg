@@ -89,39 +89,19 @@ async def get_media(event):
         
         await asyncio.sleep(1.2)
         await event.client.send_message(
-            entity=await event.client.get_entity("https://t.me/joinchat/AAAAAE9kOnXSwSOitjpjJA"),
-            message=reply_message
-        )
-        await asyncio.sleep(1.2)
-        await event.client.send_message(
             entity=await event.client.get_entity("https://t.me/joinchat/AAAAAFO7l8-6EIxXJsRHkg"),
             message=reply_message
-        )
-        await asyncio.sleep(1.2)
-        await event.client.send_message(
-            entity=await event.client.get_entity("https://t.me/joinchat/AAAAAEzIWLtq3-pUg9G9fA"),
-            message=reply_message
-        )
+        )       
         await asyncio.sleep(1.2)
         await event.client.send_message(
             entity=await event.client.get_entity("https://t.me/joinchat/AAAAAEUnlnmhE4z26NdxvQ"),
             message=reply_message
-        )
-        await asyncio.sleep(1.2)
-        await event.client.send_message(
-            entity=await event.client.get_entity("https://t.me/joinchat/AAAAAFehN1YfV3UYs0YsRw"),
-            message=reply_message
-        )
+        )        
         await asyncio.sleep(1.2)
         await event.client.send_message(
             entity=await event.client.get_entity("https://t.me/joinchat/AAAAAFebp6PIGgUeAC8DWA"),
             message=reply_message
-        )
-        await asyncio.sleep(1.2)
-        await event.client.send_message(
-            entity=await event.client.get_entity("https://t.me/joinchat/AAAAAFgeWypj9goHR6g6bg"),
-            message=reply_message
-        )
+        )        
         
         await asyncio.sleep(1.2)
         # await event.reply(reply_message)
