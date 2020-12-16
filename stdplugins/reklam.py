@@ -11,6 +11,6 @@ async def _(event):
     for a in range(1,2):
         await borg.send_message(
             event.chat_id,
-            "1-)Kanal: https://t.me/joinchat/AAAAAEylXUB6ztFxdgHp1w \n2-)Kanal: t.me/deryanin_linkleri \n3-)Kanal: t.me/linkteskilati3 \n4-)Grup: t.me/deryanin_mekani \n5-)Grup: https://t.me/joinchat/PrW4fBcmiV-qpqdtBwdYsQ"
+            "REKLAM SEÇENEKLERİMİZ:\n=========================\n20K KANAL👇\n6 saat 35 tl 3 saat ön plan sonra sabitleme\n12 saat 55tl 5 saat ön plan sonra sabitleme\n24 saat 90tl 10 saat ön plan sonra sabitleme\n\n50K KANAL👇\n6 saat 75 tl 3 saat ön plan sonra sabitleme\n12 saat 140tl 5 saat ön plan sonra sabitleme\n24 saat 250tl 10 saat ön plan sonra sabitleme\n\n220K KİTLE👇\n6 saat 120 tl 3 saat ön plan sonra sabitleme\n12 saat 200 tl 5 saat ön plan sonra sabitleme\n24 saat 350 10 saat ön plan sonra sabitleme\n========================="
 
         ) 
