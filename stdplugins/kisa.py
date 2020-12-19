@@ -17,10 +17,9 @@ async def get_adzan(event):
     link = event.pattern_match.group(1)
     if link:
         api = f"https://ay.link/api/?api=e2bb35a996ea8c9dfa4e5011005730bb584e283f&url={link}&alias&ct=1"
-        response = requests.get(api)
-        json_data = json.loads(response.text)
-        if json_data['status'] == 'success':
-          msg = json_data['shortenedUrl']
+        response = requests.get(api).json()
+        if response['status'] == 'success':
+          msg = response['shortenedUrl']
           await event.edit(f"Kısa link: {msg}")
 
 
