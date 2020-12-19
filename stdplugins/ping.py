@@ -13,7 +13,7 @@ async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
-    j = await ed.edit("Pong!")
+    j = await event.edit("Pong!")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     await j.edit("Pong!\n`{}`".format(ms))
