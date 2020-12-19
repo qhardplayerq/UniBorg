@@ -17,10 +17,11 @@ async def get_adzan(event):
     link = event.pattern_match.group(1)
     if link:
         api = f"https://ay.link/api/?api=e2bb35a996ea8c9dfa4e5011005730bb584e283f&url={link}&alias&ct=1"
-        with urllib.request.urlopen(api,headers={'Content-Type':'application/json'}) as url:
-            data = json.loads(url.read().decode())
-            msg = data['shortenedUrl']
-            await event.edit(msg)
+        request = urllib.request.Request(api, headers=headers)
+        resp = urllib.request.urlopen(request)
+        data = json.loads(resp.read())
+        msg = data['shortenedUrl']
+        await event.edit(msg)
 
 
         
