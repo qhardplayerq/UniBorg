@@ -13,6 +13,8 @@ logger = logging.getLogger(__name__)
 
 @borg.on(admin_cmd(pattern=("kisalt ?(.*)")))
 async def get_adzan(event):
+  headers = {}
+  headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17'
     
     link = event.pattern_match.group(1)
     if link:
